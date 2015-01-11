@@ -1,0 +1,16 @@
+{
+  "name": "browser and oF",
+  "version": "0.0.0",
+  "description": "receive socket from browser and foward it to oF via osc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "izmiz.me",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.10.7",
+    "node-osc": "^0.3.0",
+    "socket.io": "^1.2.1"
+  }
+}

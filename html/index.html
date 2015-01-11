@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <title>Video From OpenCV</title>
+  <style>
+  .effecttype {
+    display: inline-block;
+    width: 220px;
+    vertical-align: top;
+  }
+  </style>
+</head>
+<body>
+  <video id="myVideo" width="640" height="480" autoplay="1" ></video>
+  <form name="cv_effect" action="">
+    <div class="effecttype">
+      <label><input type="radio" name="cv_effect_radio" value="non" checked="checked">NORMAL</label>
+    </div>
+    <div class="effecttype">
+      <label><input type="radio" name="cv_effect_radio" value="canny">CANNY</label>
+      <p><label>THRESH1<input type="range" name="canny_thresh1" min ="1" max="400"></label></p>
+      <p><label>THRESH2<input type="range" name="canny_thresh2" min ="1" max="400"></label></p>
+    </div>
+    <div class="effecttype">
+      <label><input type="radio" name="cv_effect_radio" value="blur">BLUR</label>
+      <p><label>SIZE<input type="range" name="blur_size" min="1" max="201" step="2"></label></p>
+    </div>
+  </form>
+
+  <script src='/socket.io/socket.io.js'></script>
+  <script type="text/javascript">
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia;
+  window.URL = window.URL || window.webkitURL;
+
+  var video = document.getElementById('myVideo');
+  var localStream = null;
+  navigator.getUserMedia({video: true, audio: false}, 
+    function(stream) { // for success case
+      console.log(stream);
+      video.src = window.URL.createObjectURL(stream);
+    },
+    function(err) { // for error case
+      console.log(err);
+    }
+  );
+
+  var socket = io();
+
+  //-----------------------
+  // effect change
+  //-----------------------
+  document.cv_effect.cv_effect_radio[0].onchange = function(){
+    // non
+    socket.emit('change effect', 'non');
+  };
+  document.cv_effect.cv_effect_radio[1].onchange = function(){
+    // canny
+    socket.emit('change effect', 'canny');
+  };
+  document.cv_effect.cv_effect_radio[2].onchange = function(){
+    // blur
+    socket.emit('change effect', 'blur');
+  };
+
+  document.cv_effect.canny_thresh1.oninput = function() {
+    socket.emit('canny thresh1', parseInt(this.value));
+  }
+  document.cv_effect.canny_thresh2.oninput = function() {
+    // console.log(this.value);
+    socket.emit('canny thresh2', parseInt(this.value));
+  }
+  document.cv_effect.blur_size.oninput = function() {
+    // console.log(this.value);
+    socket.emit('blur size', parseInt(this.value));
+  }
+  </script>
+</body>
+</html>
