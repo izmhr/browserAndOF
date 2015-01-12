@@ -12,13 +12,14 @@
 - Node.js
 - Chrome/Firefox
 
-oF でウェブカメラに対して画像処理をするプロジェクトと同時に使います。
+oF でウェブカメラに対して画像処理をするプロジェクト [izmhr/ycaptureInOF](https://github.com/izmhr/ycaptureInOF) と同時に使います。
 
 ### 手順
+
+oF でウェブカメラに対して画像処理をするプロジェクト [izmhr/ycaptureInOF](https://github.com/izmhr/ycaptureInOF) を、そちらのREADMEに従ってビルド・起動して下さい 
 
 1. このプロジェクトをclone
 2. `npm install` express, node-osc, socket.io を導入します
 3. `index.js` 12行目付近、 osc で使うポートを、oF 側のプロジェクトとあわせてください
 4. `node index.js` で起動
-
-oF でウェブカメラに対して画像処理をするプロジェクトの方も、そちらのREADMEに従ってビルド・起動して下さい 
+5. ブラウザで localhost:3000 にアクセス
