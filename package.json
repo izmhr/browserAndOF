@@ -1,5 +1,5 @@
 {
-  "name": "browser and oF",
+  "name": "browserAndOF",
   "version": "0.0.0",
   "description": "receive socket from browser and foward it to oF via osc.",
   "main": "index.js",
